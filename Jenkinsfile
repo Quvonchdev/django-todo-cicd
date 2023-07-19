@@ -12,8 +12,8 @@ pipeline {
             steps {
                 script {
                     // Deploy to another server
-                    sshagent(credentials: ['jenkins-id']) {
-                        sh 'ssh -o StrictHostKeyChecking=no root@34.125.194.161 "cd /root/jenkins; git pull origin master; bash ./deploy.sh"'
+                    sshagent(['ec2-server-key']) {
+                        sh 'ssh -o StrictHostKeyChecking=no root@34.125.194.161 "cd /root/jenkins; git pull origin master; ./deploy.sh"'
                     }
                 }
             }
