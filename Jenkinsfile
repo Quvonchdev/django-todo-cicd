@@ -13,7 +13,7 @@ pipeline {
                 script {
                     // Deploy to another server
                     sshagent(['jenkins-github-cicd']) {
-                        sh 'ssh root@8.222.224.164 "cd /root/jenkins; git pull origin master; ./deploy.sh"'
+                        sh 'ssh -o StrictHostKeyChecking=no root@34.125.194.161 "cd /root/jenkins; git pull origin master; ./deploy.sh"'
                     }
                 }
             }
