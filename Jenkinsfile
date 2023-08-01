@@ -11,7 +11,7 @@ pipeline {
         stage("build"){
             steps {
                 echo "build"
-                sh "docker build -t django ."
+                sh "docker-compose up -d"
             }
         }
         stage("push to docker"){
