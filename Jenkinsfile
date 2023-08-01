@@ -21,6 +21,7 @@ pipeline {
                     sh "docker tag django ${env.dockerhubUser}/django:latest"
                     sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPass}"
                     sh "docker push ${env.dockerhubUser}/django:latest"
+                }
             }
         }
         stage {
