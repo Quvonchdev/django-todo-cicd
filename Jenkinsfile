@@ -28,10 +28,10 @@ pipeline {
             steps {
                 echo "deploy"
                 sshagent(['jenkins-cicd']) {
-                    sh "ssh -o StrictHostKeyChecking=no root@34.125.74.64 docker pull quvonchdev/django-node-cicd:latest"
-                    sh 'ssh -o StrictHostKeyChecking=no root@34.125.74.64 "docker stop django-app || true"'
-                    sh 'ssh -o StrictHostKeyChecking=no root@34.125.74.64 "docker rm -f django-app || true"'
-                    sh 'ssh -o StrictHostKeyChecking=no root@34.125.74.64 "docker run -p 8000:8000 -d -v /lokali/katalogingiz:/app/backend/db --name=django-app quvonchdev/django-node-cicd:latest"'
+                    sh "ssh -o StrictHostKeyChecking=no root@34.125.194.161 docker pull quvonchdev/django:latest"
+                    sh 'ssh -o StrictHostKeyChecking=no root@34.125.194.161 "docker stop django || true"'
+                    sh 'ssh -o StrictHostKeyChecking=no root@34.125.194.161 "docker rm -f django || true"'
+                    sh 'ssh -o StrictHostKeyChecking=no root@34.125.194.161 "docker run -p 8000:8000 -d --name=django quvonchdev/django:latest"'
                 }
             }
         }
