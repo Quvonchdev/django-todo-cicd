@@ -1,20 +1,20 @@
 pipeline {
     agent any 
     stages {
-        stage {
+        stage("clone git"){
             steps {
                 
                 echo "clone"
                 git url:"https://github.com/Quvonchdev/django-todo-cicd.git", branch: "main"   
             }
         }
-        stage {
+        stage("build"){
             steps {
                 echo "build"
                 sh "docker build -t django ."
             }
         }
-        stage {
+        stage("push to docker"){
             steps {
                 echo "push docker hub"
                 whithCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerhubPass",usernameVariable:"dockerhubUser")]){
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        stage {
+        stage("deploy"){
             steps {
                 echo "deploy"
             }
