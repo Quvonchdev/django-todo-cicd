@@ -2,10 +2,13 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "main"
+      - "dev"
   pull_request:
-    branches: [ "main" ]
-
+    branches:
+      - "main"
+      - "prod"
 
 jobs:
   build:
@@ -16,12 +19,18 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
-        
+
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    - name: Install Dependencies
-      run: docker compose up -d --build
+    - name: Install Dependencies for dev
+      if: github.ref == 'refs/heads/dev'
+      run: sudo docker compose up -d --build dev
+
+    - name: Install Dependencies for prod
+      if: github.ref == 'refs/heads/prod'
+      run: sudo docker compose up -d --build prod
+
